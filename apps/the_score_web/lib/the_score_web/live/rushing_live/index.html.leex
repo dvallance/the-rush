@@ -1,5 +1,9 @@
 <h1>Listing Rushing</h1>
 
+<%= if Enum.empty?(@rushing_collection) do %>
+  <button phx-click="load_rushing_data">Load Rushing Stats into DB</button>
+<% end %>
+
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, TheScoreWeb.RushingLive.FormComponent,
     id: @rushing.id || :new,
@@ -51,13 +55,13 @@
         <td><%= rushing.fum %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.rushing_show_path(@socket, :show, rushing) %></span>
-          <span><%= live_patch "Edit", to: Routes.rushing_index_path(@socket, :edit, rushing) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: rushing.id, data: [confirm: "Are you sure?"] %></span>
+          <span><%# live_redirect "Show", to: Routes.rushing_show_path(@socket, :show, rushing) %></span>
+          <span><%# live_patch "Edit", to: Routes.rushing_index_path(@socket, :edit, rushing) %></span>
+          <span><%# link "Delete", to: "#", phx_click: "delete", phx_value_id: rushing.id, data: [confirm: "Are you sure?"] %></span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Rushing", to: Routes.rushing_index_path(@socket, :new) %></span>
+<span><%# live_patch "New Rushing", to: Routes.rushing_index_path(@socket, :new) %></span>

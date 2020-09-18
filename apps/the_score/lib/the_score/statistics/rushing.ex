@@ -5,6 +5,9 @@ defmodule TheScore.Statistics.Rushing do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "rushing" do
+    field :player_name, :string
+    field :team_abbr, :string
+    field :position, :string
     field :att, :float
     field :att_g, :float
     field :avg, :float
@@ -13,10 +16,7 @@ defmodule TheScore.Statistics.Rushing do
     field :forty, :float
     field :fum, :float
     field :lng, :float
-    field :player_name, :string
-    field :position, :string
     field :td, :float
-    field :team_abbr, :string
     field :twenty, :float
     field :yds, :float
     field :yds_g, :float

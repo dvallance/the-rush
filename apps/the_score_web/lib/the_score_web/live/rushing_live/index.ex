@@ -40,6 +40,18 @@ defmodule TheScoreWeb.RushingLive.Index do
     {:noreply, assign(socket, :rushing_collection, list_rushing())}
   end
 
+  @doc """
+  Event handler to load the rushing data into the database from the 
+  json file.
+  """
+  @impl true
+  def handle_event("load_rushing_data", _, socket) do
+    "#{System.cwd!()}/apps/the_score/data/rushing.json"
+    |> TheScore.Database.Rushing.load_rushing_statistics_from_json_file()
+
+    {:noreply, socket}
+  end
+
   defp list_rushing do
     Statistics.list_rushing()
   end
