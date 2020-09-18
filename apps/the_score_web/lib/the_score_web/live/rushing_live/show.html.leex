@@ -1,0 +1,92 @@
+<h1>Show Rushing</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, TheScoreWeb.RushingLive.FormComponent,
+    id: @rushing.id,
+    title: @page_title,
+    action: @live_action,
+    rushing: @rushing,
+    return_to: Routes.rushing_show_path(@socket, :show, @rushing) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Player name:</strong>
+    <%= @rushing.player_name %>
+  </li>
+
+  <li>
+    <strong>Team abbr:</strong>
+    <%= @rushing.team_abbr %>
+  </li>
+
+  <li>
+    <strong>Position:</strong>
+    <%= @rushing.position %>
+  </li>
+
+  <li>
+    <strong>Att g:</strong>
+    <%= @rushing.att_g %>
+  </li>
+
+  <li>
+    <strong>Att:</strong>
+    <%= @rushing.att %>
+  </li>
+
+  <li>
+    <strong>Yds:</strong>
+    <%= @rushing.yds %>
+  </li>
+
+  <li>
+    <strong>Avg:</strong>
+    <%= @rushing.avg %>
+  </li>
+
+  <li>
+    <strong>Yds g:</strong>
+    <%= @rushing.yds_g %>
+  </li>
+
+  <li>
+    <strong>Td:</strong>
+    <%= @rushing.td %>
+  </li>
+
+  <li>
+    <strong>Lng:</strong>
+    <%= @rushing.lng %>
+  </li>
+
+  <li>
+    <strong>First:</strong>
+    <%= @rushing.first %>
+  </li>
+
+  <li>
+    <strong>First percent:</strong>
+    <%= @rushing.first_percent %>
+  </li>
+
+  <li>
+    <strong>Twenty:</strong>
+    <%= @rushing.twenty %>
+  </li>
+
+  <li>
+    <strong>Forty:</strong>
+    <%= @rushing.forty %>
+  </li>
+
+  <li>
+    <strong>Fum:</strong>
+    <%= @rushing.fum %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.rushing_show_path(@socket, :edit, @rushing), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.rushing_index_path(@socket, :index) %></span>

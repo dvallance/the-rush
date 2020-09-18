@@ -1,0 +1,63 @@
+<h1>Listing Rushing</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, TheScoreWeb.RushingLive.FormComponent,
+    id: @rushing.id || :new,
+    title: @page_title,
+    action: @live_action,
+    rushing: @rushing,
+    return_to: Routes.rushing_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Player name</th>
+      <th>Team abbr</th>
+      <th>Position</th>
+      <th>Att g</th>
+      <th>Att</th>
+      <th>Yds</th>
+      <th>Avg</th>
+      <th>Yds g</th>
+      <th>Td</th>
+      <th>Lng</th>
+      <th>First</th>
+      <th>First percent</th>
+      <th>Twenty</th>
+      <th>Forty</th>
+      <th>Fum</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="rushing">
+    <%= for rushing <- @rushing_collection do %>
+      <tr id="rushing-<%= rushing.id %>">
+        <td><%= rushing.player_name %></td>
+        <td><%= rushing.team_abbr %></td>
+        <td><%= rushing.position %></td>
+        <td><%= rushing.att_g %></td>
+        <td><%= rushing.att %></td>
+        <td><%= rushing.yds %></td>
+        <td><%= rushing.avg %></td>
+        <td><%= rushing.yds_g %></td>
+        <td><%= rushing.td %></td>
+        <td><%= rushing.lng %></td>
+        <td><%= rushing.first %></td>
+        <td><%= rushing.first_percent %></td>
+        <td><%= rushing.twenty %></td>
+        <td><%= rushing.forty %></td>
+        <td><%= rushing.fum %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.rushing_show_path(@socket, :show, rushing) %></span>
+          <span><%= live_patch "Edit", to: Routes.rushing_index_path(@socket, :edit, rushing) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: rushing.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Rushing", to: Routes.rushing_index_path(@socket, :new) %></span>
