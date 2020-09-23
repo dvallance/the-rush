@@ -15,7 +15,7 @@ defmodule TheScoreWeb.RushingLive.Index do
     socket =
       socket
       |> assign(:sorting, default_sorting)
-      |> assign(:rushing_collection, list_rushing(default_sorting))
+      |> assign(:rushing_collection, list_rushing(socket))
 
     {:ok, socket}
   end
@@ -48,7 +48,7 @@ defmodule TheScoreWeb.RushingLive.Index do
     rushing = Statistics.get_rushing!(id)
     {:ok, _} = Statistics.delete_rushing(rushing)
 
-    {:noreply, assign(socket, :rushing_collection, list_rushing())}
+    {:noreply, assign(socket, :rushing_collection, list_rushing(socket))}
   end
 
   @doc """
@@ -64,29 +64,36 @@ defmodule TheScoreWeb.RushingLive.Index do
   end
 
   @doc """
+  """
+  @impl true
+  def handle_event("name-filter", %{"name_filter_form" => %{"name" => name}}, socket) do
+    socket = assign(socket, :name_filter, name)
+    rushing_collection = list_rushing(socket)
+
+    {:noreply, assign(socket, :rushing_collection, rushing_collection)}
+  end
+
+  @doc """
   Event handler for rushing table sorting by headers.
   """
   @impl true
   def handle_event("rushing-sort-by", params, socket) do
-    sorting =
-      sorting_from_params(params, socket)
+    sorting = sorting_from_params(params, socket)
 
     socket =
       socket
-      |> assign(:rushing_collection, Statistics.list_rushing(sorting))
+      |> assign(:rushing_collection, list_rushing(socket))
       |> assign(:sorting, sorting)
 
     {:noreply, socket}
   end
 
-  @spec list_rushing(sorting()) :: [%Rushing{}]
-  defp list_rushing(sorting) do
-    Statistics.list_rushing(sorting)
-  end
-
-  @spec list_rushing() :: [%Rushing{}]
-  defp list_rushing() do
-    Statistics.list_rushing()
+  @spec list_rushing(%Phoenix.LiveView.Socket{}) :: [%Rushing{}]
+  defp list_rushing(socket) do
+    sorting = Map.get(socket.assigns, :sorting)
+    name_filter = Map.get(socket.assigns, :name_filter)
+    
+    Statistics.list_rushing(sorting, name_filter)
   end
 
   @doc """
@@ -95,10 +102,9 @@ defmodule TheScoreWeb.RushingLive.Index do
   """
   defp sorting_from_params(%{"field" => field} = _params, socket) do
     {direction, sorting_field} = socket.assigns.sorting
-                         |> IO.inspect(label: "SORTING")
     field = String.to_atom(field)
 
-    if field == sorting_field do 
+    if field == sorting_field do
       {swap_direction(direction), field}
     else
       {:asc, field}

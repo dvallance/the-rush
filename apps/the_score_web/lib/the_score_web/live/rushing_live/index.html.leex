@@ -1,5 +1,11 @@
 <h1>Listing Rushing</h1>
 
+
+<%= f = form_for :name_filter_form, "#", phx_submit: "name-filter" %>
+<%= text_input f, :name, class: "rushing__search-name-filter", placeholder: "Filter by player name...", value: Map.get(assigns, :name_filter) %> 
+  <%= submit "", style: "display:none" %>
+</form>
+
 <%= if Enum.empty?(@rushing_collection) do %>
   <button phx-click="load_rushing_data">Load Rushing Stats into DB</button>
 <% end %>

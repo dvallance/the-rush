@@ -21,8 +21,17 @@ defmodule TheScore.Statistics do
     Repo.all(Rushing)
   end
 
-  def list_rushing(sorting) do
-    Rushing |> order_by(^sorting) |> Repo.all()
+  #NOTE I just hacked in the name filter. ...but ideally an array of filters 
+  # should be allowed and the query could apply them all. This would allow 
+  # pagination as well.
+  def list_rushing(sorting, name_filter_value) do
+    Rushing |> order_by(^sorting) |> apply_name_filter(name_filter_value) |> Repo.all()
+  end
+
+  defp apply_name_filter(%Ecto.Query{} = query, nil), do: query
+  defp apply_name_filter(%Ecto.Query{} = query, name_filters_value) do
+    name_like = "%#{name_filters_value}%"
+    query |> where([rushing], like(rushing.player_name, ^name_like))
   end
 
   @doc """
