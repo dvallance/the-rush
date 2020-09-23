@@ -1,0 +1,15 @@
+.rushing__tbl-header {
+  white-space: nowrap;
+}
+
+.rushing__tbl-value {
+  color: rgb(56,56,56);
+}
+
+.rushing__tbl-value--right {
+  text-align: right;  
+}
+
+.rushing__header-arrow {
+  color: rgb(0,100,0);
+}

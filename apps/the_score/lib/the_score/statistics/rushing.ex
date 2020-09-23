@@ -2,6 +2,23 @@ defmodule TheScore.Statistics.Rushing do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type field() ::
+          :player_name
+          | :team_abbr
+          | :position
+          | :att
+          | :att_g
+          | :avg
+          | :first
+          | :first_percent
+          | :forty
+          | :fum
+          | :lng
+          | :td
+          | :twenty
+          | :yds
+          | :yds_g
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "rushing" do
@@ -27,7 +44,39 @@ defmodule TheScore.Statistics.Rushing do
   @doc false
   def changeset(rushing, attrs) do
     rushing
-    |> cast(attrs, [:player_name, :team_abbr, :position, :att_g, :att, :yds, :avg, :yds_g, :td, :lng, :first, :first_percent, :twenty, :forty, :fum])
-    |> validate_required([:player_name, :team_abbr, :position, :att_g, :att, :yds, :avg, :yds_g, :td, :lng, :first, :first_percent, :twenty, :forty, :fum])
+    |> cast(attrs, [
+      :player_name,
+      :team_abbr,
+      :position,
+      :att_g,
+      :att,
+      :yds,
+      :avg,
+      :yds_g,
+      :td,
+      :lng,
+      :first,
+      :first_percent,
+      :twenty,
+      :forty,
+      :fum
+    ])
+    |> validate_required([
+      :player_name,
+      :team_abbr,
+      :position,
+      :att_g,
+      :att,
+      :yds,
+      :avg,
+      :yds_g,
+      :td,
+      :lng,
+      :first,
+      :first_percent,
+      :twenty,
+      :forty,
+      :fum
+    ])
   end
 end

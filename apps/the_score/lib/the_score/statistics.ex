@@ -21,6 +21,10 @@ defmodule TheScore.Statistics do
     Repo.all(Rushing)
   end
 
+  def list_rushing(sorting) do
+    Rushing |> order_by(^sorting) |> Repo.all()
+  end
+
   @doc """
   Gets a single rushing.
 

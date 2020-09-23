@@ -16,43 +16,41 @@
 <table>
   <thead>
     <tr>
-      <th>Player name</th>
-      <th>Team abbr</th>
-      <th>Position</th>
-      <th>Att g</th>
-      <th>Att</th>
-      <th>Yds</th>
-      <th>Avg</th>
-      <th>Yds g</th>
-      <th>Td</th>
-      <th>Lng</th>
-      <th>First</th>
-      <th>First percent</th>
-      <th>Twenty</th>
-      <th>Forty</th>
-      <th>Fum</th>
-
-      <th></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="player_name">Name <%= draw_sorting_direction(:player_name, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="team_abbr">Team <%= draw_sorting_direction(:team_abbr, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="position">Position<%= draw_sorting_direction(:position, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="att_g">Att/G<%= draw_sorting_direction(:att_g, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="att">Att <%= draw_sorting_direction(:att, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="yds">Yds <%= draw_sorting_direction(:yds, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="avg">Avg <%= draw_sorting_direction(:avg, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="yds_g">Yds/g <%= draw_sorting_direction(:yds_g, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="td">Td <%= draw_sorting_direction(:td, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="lng">Lng <%= draw_sorting_direction(:lng, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="first">1st <%= draw_sorting_direction(:first, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="first_percent">1st% <%= draw_sorting_direction(:first_percent, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="twenty">20+ <%= draw_sorting_direction(:twenty, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="forty">40+ <%= draw_sorting_direction(:forty, @sorting) %></th>
+      <th class="rushing__tbl-header" phx-click="rushing-sort-by" phx-value-field="fum">Fum <%= draw_sorting_direction(:fum, @sorting) %></th>
     </tr>
   </thead>
   <tbody id="rushing">
     <%= for rushing <- @rushing_collection do %>
       <tr id="rushing-<%= rushing.id %>">
-        <td><%= rushing.player_name %></td>
-        <td><%= rushing.team_abbr %></td>
-        <td><%= rushing.position %></td>
-        <td><%= rushing.att_g %></td>
-        <td><%= rushing.att %></td>
-        <td><%= rushing.yds %></td>
-        <td><%= rushing.avg %></td>
-        <td><%= rushing.yds_g %></td>
-        <td><%= rushing.td %></td>
-        <td><%= rushing.lng %></td>
-        <td><%= rushing.first %></td>
-        <td><%= rushing.first_percent %></td>
-        <td><%= rushing.twenty %></td>
-        <td><%= rushing.forty %></td>
-        <td><%= rushing.fum %></td>
+        <td class="rushing__tbl-value"><%= rushing.player_name %></td>
+        <td class="rushing__tbl-value"><%= rushing.team_abbr %></td>
+        <td class="rushing__tbl-value"><%= rushing.position %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.att_g %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.att %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.yds %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.avg %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.yds_g %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.td %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.lng %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.first %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.first_percent %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.twenty %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.forty %></td>
+        <td class="rushing__tbl-value rushing__tbl-value--right"><%= rushing.fum %></td>
 
         <td>
           <span><%# live_redirect "Show", to: Routes.rushing_show_path(@socket, :show, rushing) %></span>
