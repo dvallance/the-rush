@@ -1,14 +1,17 @@
-<h1>Listing Rushing</h1>
+<p>For convience you can load the database from the json file here!</p>
+<button phx-click="load_rushing_data">Load DB (Don't do this multiple times)</button>
 
+<hr/>
+
+<h1>Rushing Statistics</h1>
 
 <%= f = form_for :name_filter_form, "#", phx_submit: "name-filter" %>
 <%= text_input f, :name, class: "rushing__search-name-filter", placeholder: "Filter by player name...", value: Map.get(assigns, :name_filter) %> 
   <%= submit "", style: "display:none" %>
 </form>
 
-<%= if Enum.empty?(@rushing_collection) do %>
-  <button phx-click="load_rushing_data">Load Rushing Stats into DB</button>
-<% end %>
+
+<%= download_link(@sorting, Map.get(assigns, :name_filter)) %> 
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, TheScoreWeb.RushingLive.FormComponent,

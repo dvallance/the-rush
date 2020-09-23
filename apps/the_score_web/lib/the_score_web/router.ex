@@ -17,8 +17,9 @@ defmodule TheScoreWeb.Router do
   scope "/", TheScoreWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", RushingLive.Index, :index
     live "/rushing", RushingLive.Index, :index
+    get "/download/rushing_statistics", DownloadController, :rushing_stats
   end
 
   # Other scopes may use custom stacks.

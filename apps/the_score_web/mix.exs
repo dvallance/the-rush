@@ -49,7 +49,8 @@ defmodule TheScoreWeb.MixProject do
       {:gettext, "~> 0.11"},
       {:the_score, in_umbrella: true},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:csv, "~> 2.4.1"}
     ]
   end
 
